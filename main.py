@@ -16,7 +16,7 @@ from image_extraction.bbox import BoundingBox, get_bounding_boxes
 @click.option("-v", "--visual", default=False, help="Input image and bounding box visualization.", is_flag=True)
 def extract_bboxes(input, output, threshold, align, center, min_factor, visual):
     if not os.path.exists(input):
-        raise Exception(f"File {input} is not accessibel or doesn't exist")
+        raise Exception(f"File {input} is not accessible or doesn't exist")
 
     image = cv2.imread(input, cv2.IMREAD_GRAYSCALE)
     if image is None:
