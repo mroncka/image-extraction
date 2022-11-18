@@ -5,9 +5,8 @@ Minimal bounding box extraction and alignment. This project is implmentation of 
 
 Main purpose of this project is implementation of an algorithm for minimal bounding box extraction from segmentation map. Additionaly each of extracted bounding boxes is alligned to the xy axis with the longer dimnesion being aligned to the y axis. This project can be used directly with the existing example or as a pip package library.
 
-## Getting started
-### Prerequisites and usage
-#### Using Docker Compose
+## Prerequisites and usage
+### Using Docker Compose
 ```sh
 docker-compose build
 docker-compose run app -i assignment/RS_homework_BB.png -o output -t 4 -a True -c
@@ -19,19 +18,19 @@ make build
 COMMAND="-i assignment/RS_homework_BB.png -o output -t 4 -a True -c" make run
 ```
 
-#### Using Docker
+### Using Docker
 ```sh
 docker build . -t python-template --target build
 docker run -v ${PWD}:/app -w /app -it python-template -i input/test.png -o output -t 4 -a True -c
 ```
 
-#### Using Pip
+### Using Pip
 ```
 pip install -r requirements.txt
 python main.py -i input/test.png -o outputs -t 128 -o output -t 4 -a True -c -v
 ```
 
-### Arguments
+## Arguments
 - `-i`, `--input` TEXT          Input file for bbox extraction.
 - `-o`, `--output` TEXT         Directory to store extracted bbox images. (default `output/{input_filename}`)
 - `-t`, `--threshold` INTEGER   Image intensity threshold used to extract contours. (`0`-`255`, default `4`)
@@ -40,17 +39,17 @@ python main.py -i input/test.png -o outputs -t 128 -o output -t 4 -a True -c -v
 - `-f`, `--min_factor` INTEGER  Bounding box dimension will be divisible by specified value. (default `1`)
 - `-v`, `--visual`              Input image and bounding box visualization using `opencv.imshow`.
 
-### Using as a Pip package
-#### From git
+## Using as a Pip package
+### From git
 ```sh
 pip install git+https://github.com/mroncka/python-template.git
 ```
-#### Locally
+### Locally
 ```sh
 git clone git@github.com:mroncka/python-template.git && cd python-template && pip install -e .
 ```
 
-#### Usage
+### Usage
 ```python
 import cv2
 from image_extraction.bbox import get_bounding_boxes
@@ -61,15 +60,8 @@ for i, bbox in enumerate(bboxes):
     crop = bbox.crop_axis_aligned(image)
 ```
 
-#### Examples
-```python
-python example.py min
-python example.py visual
-python example.py rotation
-```
-
-### Running tests
-#### Using Docker Compose (ideally - clean environment)
+## Running tests
+### Using Docker Compose
 ```sh
 docker-compose build
 docker-compose run test
@@ -80,16 +72,31 @@ make build
 make test
 ```
 
-#### Locally
+### Locally
 ```sh
 pip install -r test_requirements.txt
 pytest tests
 ```
 
+## Examples
+Running examples require installation of dev_requirements and in case of docker enabled X11 forwarding.
+
+```python
+python example.py min
+python example.py visual
+python example.py rotation
+```
+
 ### Example input and output
 <img src="assignment/RS_homework_BB.png" alt="drawing" style="width:50%;"/>
 
-### Found contours with threshold values of `4` and `64` (specified by `-t` argument)
+### Extracted contours with threshold values of `4` and `64` (specified by `-t` argument)
 <img src="assignment/output_t64/visual.png" alt="drawing" style="width:48%;"/> | ![example output](assignment/output_t64/contour_1.png "Example output") | ![example output](assignment/output_t64/contour_0.png "Example output")
 
 <img src="assignment/output_t4/visual.png" alt="drawing" style="width:48%;"/> | ![example output](assignment/output_t4/contour_2.png "Example output") | ![example output](assignment/output_t4/contour_1.png "Example output") | ![example output](assignment/output_t4/contour_0.png "Example output")
+
+## Build Requirements
+```python
+click==8.1.3
+opencv-python-headless==4.6.0.66
+```
