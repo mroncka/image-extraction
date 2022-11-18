@@ -5,9 +5,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      target: runtime
+      target: build
     restart: "no"
-    command: "true"
     volumes:
       - ./:/app
   test:
@@ -16,5 +15,3 @@ services:
       dockerfile: Dockerfile
       target: test
     restart: "no"
-    volumes:
-      - ./:/app

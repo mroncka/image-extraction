@@ -21,7 +21,7 @@ COMMAND="-i assignment/RS_homework_BB.png -o output -t 4 -a True -c" make run
 
 #### Using Docker
 ```sh
-docker build . -t python-template --target runtime
+docker build . -t python-template --target build
 docker run -v ${PWD}:/app -w /app -it python-template -i input/test.png -o output -t 4 -a True -c
 ```
 
