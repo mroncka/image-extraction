@@ -44,7 +44,7 @@ def example_visual():
 
 @examples.command("rotation")
 def example_rotation():
-    for angle in range(0, 360, 1):
+    for angle in range(0, 360, 5):
         image = cv2.imread("assignment/RS_homework_BB.png", cv2.IMREAD_GRAYSCALE)
         center = tuple(np.array(image.shape) // 2)
         threshold = np.median(image)

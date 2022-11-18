@@ -52,7 +52,8 @@ git clone git@github.com:mroncka/python-template.git && cd python-template && pi
 
 #### Usage
 ```python
-from image_extraction.bbox import BoundingBox, get_bounding_boxes
+import cv2
+from image_extraction.bbox import get_bounding_boxes
 
 image = cv2.imread(input, cv2.IMREAD_GRAYSCALE)
 bboxes = get_bounding_boxes(image)
@@ -60,8 +61,15 @@ for i, bbox in enumerate(bboxes):
     crop = bbox.crop_axis_aligned(image)
 ```
 
+#### Examples
+```python
+python example.py min
+python example.py visual
+python example.py rotation
+```
+
 ### Running tests
-#### Using Docker Compose
+#### Using Docker Compose (ideally - clean environment)
 ```sh
 docker-compose build
 docker-compose run test
