@@ -7,22 +7,76 @@ Main purpose of this project is implementation of an algorithm for minimal bound
 
 ## Getting started
 ### Prerequisites and usage
-#### Using Docker (Recommended)
+#### Using Docker Compose
+```sh
+docker-compose build
+docker-compose run app -i assignment/RS_homework_BB.png -o output -t 4 -a True -c
 ```
-docker build . -t konica-bbox-extraction
-docker run -it konica-bbox-extraction run.py -i inputs/test.png -o outputs/test -t 128
+
+The same can be achieved using Makefile
+```sh
+make build
+COMMAND="-i assignment/RS_homework_BB.png -o output -t 4 -a True -c" make run
+```
+
+#### Using Docker
+```sh
+docker build . -t python-template --target runtime
+docker run -v ${PWD}:/app -w /app -it python-template -i input/test.png -o output -t 4 -a True -c
 ```
 
 #### Using Pip
 ```
 pip install -r requirements.txt
-python run.py -i inputs/test.png -o outputs/test -t 128
+python main.py -i input/test.png -o outputs -t 128 -o output -t 4 -a True -c -v
 ```
+
 ### Arguments
-- `-i` - input file
-- `-o` - output directory (default `output/{input_filename}`)
-- `-t` - threshold specification (`0`-`255`, default `8`)
-- `-v` - enable window visualization
+- `-i`, `--input` TEXT          Input file for bbox extraction.
+- `-o`, `--output` TEXT         Directory to store extracted bbox images. (default `output/{input_filename}`)
+- `-t`, `--threshold` INTEGER   Image intensity threshold used to extract contours. (`0`-`255`, default `4`)
+- `-a`, `--align` BOOLEAN       Align the bbox dominant dimension with the Y axis. (default `True`)
+- `-c`, `--center` BOOLEAN      Center bbox around the contour. (default `False`)
+- `-f`, `--min_factor` INTEGER  Bounding box dimension will be divisible by specified value. (default `1`)
+- `-v`, `--visual`              Input image and bounding box visualization using `opencv.imshow`.
+
+### Using as a Pip package
+#### From git
+```sh
+pip install git+https://github.com/mroncka/python-template.git
+```
+#### Locally
+```sh
+git clone git@github.com:mroncka/python-template.git && cd python-template && pip install -e .
+```
+
+#### Usage
+```python
+from image_extraction.bbox import BoundingBox, get_bounding_boxes
+
+image = cv2.imread(input, cv2.IMREAD_GRAYSCALE)
+bboxes = get_bounding_boxes(image)
+for i, bbox in enumerate(bboxes):
+    crop = bbox.crop_axis_aligned(image)
+```
+
+### Running tests
+#### Using Docker Compose
+```sh
+docker-compose build
+docker-compose run test
+```
+The same can be achieved using Makefile
+```sh
+make build
+make test
+```
+
+#### Locally
+```sh
+pip install -r test_requirements.txt
+pytest tests
+```
 
 
 ### Example input
