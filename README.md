@@ -20,8 +20,8 @@ COMMAND="-i assignment/RS_homework_BB.png -o output -t 4 -a True -c" make run
 
 ### Using Docker
 ```sh
-docker build . -t python-template --target build
-docker run -v ${PWD}:/app -w /app -it python-template -i input/test.png -o output -t 4 -a True -c
+docker build . -t image-extraction --target build
+docker run -v ${PWD}:/app -w /app -it image-extraction -i input/test.png -o output -t 4 -a True -c
 ```
 
 ### Using Pip
@@ -39,14 +39,16 @@ python main.py -i input/test.png -o outputs -t 128 -o output -t 4 -a True -c -v
 - `-f`, `--min_factor` INTEGER  Bounding box dimension will be divisible by specified value. (default `1`)
 - `-v`, `--visual`              Input image and bounding box visualization using `opencv.imshow`.
 
+Visualization requires installation of dev_requirements and in case of docker enabled X11 forwarding.
+
 ## Using as a Pip package
 ### From git
 ```sh
-pip install git+https://github.com/mroncka/python-template.git
+pip install git+https://github.com/mroncka/image-extraction.git
 ```
 ### Locally
 ```sh
-git clone git@github.com:mroncka/python-template.git && cd python-template && pip install -e .
+git clone git@github.com:mroncka/image-extraction.git && cd image-extraction && pip install -e .
 ```
 
 ### Usage

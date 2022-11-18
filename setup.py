@@ -6,7 +6,7 @@ setup(
     name='image_extraction',
     version=__version__,
 
-    url='https://github.com/mroncka/python-template',
+    url='https://github.com/mroncka/image-extraction',
     author='Martin Roncka',
     author_email='mroncka@gmail.com',
 
