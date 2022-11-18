@@ -78,9 +78,10 @@ pip install -r test_requirements.txt
 pytest tests
 ```
 
+### Example input and output
+<img src="assignment/RS_homework_BB.png" alt="drawing" style="width:50%;"/>
 
-### Example input
-![sample input](assignment/RS_homework_BB.png "Sample input")
+### Found contours with threshold values of `4` and `64` (specified by `-t` argument)
+<img src="assignment/output_t64/visual.png" alt="drawing" style="width:48%;"/> | ![example output](assignment/output_t64/contour_1.png "Example output") | ![example output](assignment/output_t64/contour_0.png "Example output")
 
-### Sample output
-![example output](assignment/sample_output.png "Example output")
+<img src="assignment/output_t4/visual.png" alt="drawing" style="width:48%;"/> | ![example output](assignment/output_t4/contour_2.png "Example output") | ![example output](assignment/output_t4/contour_1.png "Example output") | ![example output](assignment/output_t4/contour_0.png "Example output")
