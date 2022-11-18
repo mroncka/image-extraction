@@ -1,10 +1,19 @@
 import os
+import shutil
 import click
 
 import cv2
 
 from image_extraction.bbox import BoundingBox, get_bounding_boxes
 
+
+def recreate_output_directory(directory):
+    try:
+        shutil.rmtree(directory)
+    except Exception:
+        print("Unable to remove existing results folder")
+
+    os.makedirs(directory, exist_ok=True)
 
 @click.command()
 @click.option("-i", "--input", "input", default="assignment/RS_homework_BB.png", prompt="Input image path", help="Image for bbox extraction.")
@@ -26,8 +35,8 @@ def extract_bboxes(input, output, threshold, align, center, min_factor, visual):
     bboxes = get_bounding_boxes(image, threshold, bbox_type, align)
 
     output_directory = f"{output}/{os.path.basename(input)}"
-    os.makedirs(output_directory, exist_ok=True)
-
+    recreate_output_directory(output_directory)
+    
     for i, bbox in enumerate(bboxes):
         crop = bbox.crop_axis_aligned(image, center, min_factor)
         cv2.imwrite(f"{output_directory}/contour_{i}.png", crop)
